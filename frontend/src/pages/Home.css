@@ -1,0 +1,325 @@
+.home-container {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  background: linear-gradient(135deg, #020a07, #8cc4a8);
+}
+
+/* Wave animation layers */
+.wave {
+  position: absolute;
+  bottom: 0;
+  width: 200%;
+  height: 20%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3), transparent);
+  border-radius: 43%;
+  animation: waveAnimation 10s linear infinite;
+  opacity: 0.6;
+}
+
+.wave.wave1 {
+  animation-delay: 0s;
+  bottom: 0;
+}
+
+.wave.wave2 {
+  animation-delay: 2s;
+  bottom: 10px;
+  opacity: 0.4;
+}
+
+.wave.wave3 {
+  animation-delay: 4s;
+  bottom: 20px;
+  opacity: 0.3;
+}
+
+@keyframes waveAnimation {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+/* Content on top of waves */
+.home-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-logo {
+  width: 130px;
+  margin-bottom: 25px;
+  animation: fadeIn 1.5s ease;
+}
+
+.home-title {
+  font-size: 42px;
+  margin-bottom: 30px;
+  animation: slideDown 1.2s ease;
+}
+
+.home-button {
+  padding: 14px 40px;
+  font-size: 20px;
+  background: linear-gradient(90deg, #8ada98, #eee8eb);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  animation: fadeIn 2s ease;
+  transition: 0.3s;
+}
+
+.home-button:hover {
+  transform: scale(1.07);
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.cursor-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3; /* above stars but below content */
+  pointer-events: none; /* don't block mouse events */
+}
+
+.wave-text span {
+    display: inline-block;
+    font-size: 4rem;
+    animation: wave 2s ease-in-out infinite;
+}
+
+.wave-text span:nth-child(1) {
+    animation-delay: 0s;
+}
+.wave-text span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.wave-text span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+.wave-text span:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+@keyframes wave {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Sliding Login Panel */
+.login-panel {
+  position: fixed;
+  top: 0;
+  right: -100%; /* hidden initially */
+  width: 100%;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: -2px 0 25px rgba(0, 0, 0, 0.4);
+  transition: right 0.6s ease;
+  z-index: 1000; /* above everything */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* When open */
+.login-panel.open {
+  right: 0;
+}
+
+/* Login box centered inside panel */
+.login-box {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 35px 45px;
+  border-radius: 15px;
+  width: 70%;
+  max-width: 360px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+
+  animation: floatWave 3s ease-in-out infinite;
+}
+
+@keyframes floatWave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Input Box */
+.login-box input {
+  width: 100%;
+  margin: 12px 0;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.35);
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  color: #fff;
+  font-size: 15px;
+}
+
+/* Login button style */
+.login-submit {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background: linear-gradient(120deg, #8cc4a8, #3a6b63);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.login-submit:hover {
+  transform: scale(1.05);
+}
+
+/* Close button */
+.close-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  transition: 0.3s;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.tracking-in-contract-bck {
+	-webkit-animation: tracking-in-contract-bck 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	        animation: tracking-in-contract-bck 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+@-webkit-keyframes tracking-in-contract-bck {
+  0% {
+    letter-spacing: 1em;
+    -webkit-transform: translateZ(400px);
+            transform: translateZ(400px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+@keyframes tracking-in-contract-bck {
+  0% {
+    letter-spacing: 1em;
+    -webkit-transform: translateZ(400px);
+            transform: translateZ(400px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-blurred-right {
+	-webkit-animation: slide-in-blurred-right 1.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) 2s infinite alternate both;
+	        animation: slide-in-blurred-right 1.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) 2s infinite alternate both;
+}
+
+
+@-webkit-keyframes slide-in-blurred-right {
+  0% {
+    -webkit-transform: translateX(1000px) scaleX(2.5) scaleY(0.2);
+            transform: translateX(1000px) scaleX(2.5) scaleY(0.2);
+    -webkit-transform-origin: 0% 50%;
+            transform-origin: 0% 50%;
+    -webkit-filter: blur(40px);
+            filter: blur(40px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0) scaleY(1) scaleX(1);
+            transform: translateX(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-blurred-right {
+  0% {
+    -webkit-transform: translateX(1000px) scaleX(2.5) scaleY(0.2);
+            transform: translateX(1000px) scaleX(2.5) scaleY(0.2);
+    -webkit-transform-origin: 0% 50%;
+            transform-origin: 0% 50%;
+    -webkit-filter: blur(40px);
+            filter: blur(40px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0) scaleY(1) scaleX(1);
+            transform: translateX(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+}

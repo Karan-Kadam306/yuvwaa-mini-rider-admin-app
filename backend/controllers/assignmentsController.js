@@ -44,7 +44,7 @@ exports.createAssignment = async (req, res) => {
 exports.getAssignments = async (req, res) => {
   try {
     const result = await pool.query(`
-      SELECT ba.id, ba.assigned_at,
+      SELECT ba.id, ba.rider_id, ba.bike_id, ba.assigned_at,
              r.first_name, r.last_name, r.mobile,
              b.bike_code, b.model
       FROM bike_assignments ba
@@ -53,10 +53,9 @@ exports.getAssignments = async (req, res) => {
       WHERE ba.active = true
       ORDER BY ba.id DESC
     `);
-
     res.json(result.rows);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
   }
 };
 
@@ -90,4 +89,22 @@ exports.deleteAssignment = async (req, res) => {
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
+
+  exports.deleteAssignment = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await pool.query(
+      `DELETE FROM bike_assignments WHERE id=$1 RETURNING *`,
+      [id]
+    );
+
+    if (result.rowCount === 0) return res.status(404).json({ error: "Assignment not found" });
+
+    res.json({ message: "Assignment deleted", assignment: result.rows[0] });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+};
+
 };
